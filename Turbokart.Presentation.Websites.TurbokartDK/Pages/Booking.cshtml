@@ -1,0 +1,81 @@
+﻿@page
+@model BookingModel
+@{
+    ViewData["Title"] = "Booking";
+}
+
+@if (Model.bookings is not null)
+{
+    @foreach (var booking in Model.bookings)
+    {
+        <p>
+            @booking.Date
+        </p>
+    }
+}
+
+<h1>Booking</h1>
+<form class="book-form" method="post">
+    <div class="row race-type">
+        <div class="col">
+            <label>Race type:</label>
+            <select asp-for="Grandprix">
+                <option value="Enkelt" selected>Enkelt</option>
+                <option value="Double">Double</option>
+            </select>
+        </div>        
+    </div>
+    <div class="row">
+        <div class="col">
+            <label>Email:</label>
+            <input type="email" value="" id="" required asp-for="Email" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <label>Phonenumber:</label>
+            <input type="tel" pattern="[0-9]{8}" asp-for="Phonenumber" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <label>Dato:</label>
+            <input type="date" asp-for="Date"/>
+        </div>        
+    </div>
+    <div class="row">
+        <div class="col radie">
+            <div class="radio">
+                <label>10:00</label>
+                <input type="radio" name="time" value="10:00" asp-for="Time"/>
+            </div>
+            <div class="radio">
+                <label>10:30</label>
+                <input type="radio" name="time" value="10:30" asp-for="Time" />
+            </div>
+            <div class="radio">
+                <label>11:00</label>
+                <input type="radio" name="time" value="11:00" asp-for="Time" />
+            </div>
+            <div class="radio">
+                <label>11:30</label>
+                <input type="radio" name="time" value="11:30" asp-for="Time" />
+            </div>
+            <div class="radio">
+                <label>12:00</label>
+                <input type="radio" name="time" value="12:00" asp-for="Time" />
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div>
+            <label>Antal personer:</label>
+            <input type="number" min="1" max="20" value="1" asp-for="Amount"/>
+        </div>
+    </div>
+    <div class="row">
+        <div>
+            <button>Book</button>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Turbokart.Application.Interfaces\Turbokart.Application.Interfaces.csproj" />
+    <ProjectReference Include="..\Turbokart.Infrastructure.Persistence.Interfaces\Turbokart.Infrastructure.Persistence.Interfaces.csproj" />
+  </ItemGroup>
+
+</Project>

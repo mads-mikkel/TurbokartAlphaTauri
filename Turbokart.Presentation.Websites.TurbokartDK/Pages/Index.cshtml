@@ -1,0 +1,23 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<section class="full-width mainpage-info-section">
+    <article class="content-grid mainpage-info">
+        <div class="logo">
+            <img src="img/logo.png" alt="Turbokart DK" />
+        </div>
+        <h1 class="text-center">Turbokart DK</h1>
+        <p>Oplev adrenalinen pumpe og fartens sus på vores spændende gokartbane. Hos TurboKart.dk tilbyder vi en enestående oplevelse for både nybegyndere og erfarne gokartkørere. Vores topmoderne faciliteter og professionelt designet bane sikrer et eventyr fyldt med spænding og sjov for alle aldre.</p>
+    </article>
+</section>
+<section class="prices-home">
+    <article>
+        <h3>Priser</h3>
+        <a asp-page="/Prices">
+            <button>Priser</button>
+        </a>
+    </article>
+</section>

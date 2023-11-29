@@ -1,0 +1,54 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Turbokart.Presentation.Websites.TurbokartDK</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/Turbokart.Presentation.Websites.TurbokartDK.styles.css" asp-append-version="true" />
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li>
+                    <a asp-page="/Index">Forside</a>
+                </li>
+                <li class="nav-logo">
+                    <a asp-page="/Index">
+                        <img src="img/logo.png" alt="Turbokart DK" />
+                    </a>
+                </li>
+                <li>
+                    <a asp-page="/Booking">Booking</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <main class="content-grid">
+        @RenderBody()
+    </main>
+
+    <footer class="content-grid">
+        <div class="wrapper">
+            <div class="col">
+                <p>Adresse: Baghavegade 5, 6500 Vojens</p>
+                <p>Tlf. 87 65 43 21</p>
+                <p>Email: Leif.Skovbur@gmail.com</p>
+            </div>
+            <div class="col">
+                <p>Man-Fre: 9:00-17:00</p>
+                <p>Lørdag: 12:00-20:00</p>
+                <p>Søndag: 12:00-16:00</p>
+            </div>
+        </div>        
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
