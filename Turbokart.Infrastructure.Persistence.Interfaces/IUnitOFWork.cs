@@ -6,5 +6,6 @@
         void RollBack();
         IBookingRepository BookingRepository { get; }
         ICustomerRepository CustomerRepository { get; }
+        IDeletedBookingRepository DeletedBookingRepository { get; }
     }
 }

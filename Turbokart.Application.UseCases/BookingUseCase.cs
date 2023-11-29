@@ -67,9 +67,15 @@ namespace Turbokart.Application.UseCases
             return await GetOneBooking(booking.BookingId);
         }
 
-        public async Task<IEnumerable<Booking>> DeleteBooking(int id)
+        public async Task<IEnumerable<Booking>> DeleteBooking(int id, string reason)
         {
             IBookingRepository bookingRepository = unitOfWork.BookingRepository;
+            IDeletedBookingRepository deletedBookingRepository = unitOfWork.DeletedBookingRepository;
+
+            var booking = await GetOneBooking(id);
+            DeletedBooking deletedBooking = new() { Amount = booking.Amount, BookingId = booking.BookingId, Customer = booking.Customer, CustomerId = booking.CustomerId, Date = booking.Date, Email = booking.Email, Grandprix = booking.Grandprix, Phonenumber = booking.Phonenumber, ReasonOfDeletion = reason };
+            deletedBookingRepository.Save(deletedBooking);
+
             await bookingRepository.DeleteBooking(await GetOneBooking(id));
             await unitOfWork.Commit();
             return await GetAllBookings();
