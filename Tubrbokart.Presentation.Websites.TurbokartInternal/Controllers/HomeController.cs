@@ -15,9 +15,22 @@ namespace Tubrbokart.Presentation.Websites.TurbokartInternal.Controllers
             this.bookingUseCase = bookingUseCase;
         }
 
+        [HttpGet]
         public async Task<IActionResult> Index()
         {
             var viewModel = new IndexModel();
+            viewModel.Bookings = await bookingUseCase.GetAllBookings();
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Index(IndexModel model)
+        {
+            var viewModel = model;
+            if (ModelState.IsValid)
+            {
+
+            }
             viewModel.Bookings = await bookingUseCase.GetAllBookings();
             return View(viewModel);
         }

@@ -10,7 +10,7 @@
         <div class="row">
             <div class="col">
                 <label class="form-label">Dato:</label>
-                <input class="form-control" type="date" asp-for="Date" />
+                <input class="form-control" type="date" asp-for="Date" value="@Model.Date.ToString()" />
             </div>
             <div class="col">
                 <label class="form-label">Dage frem:</label>
@@ -36,6 +36,8 @@
                 <th scope="col">Antal:</th>
                 <th scope="col">Dato:</th>
                 <th scope="col">Navn:</th>
+                <th></th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -66,7 +68,12 @@
 
                         @booking.Customer.Name
                     </td>
-
+                    <td>
+                        <a asp-controller="Booking" asp-action="Edit" asp-route-id="@booking.BookingId" ><i class="bi bi-pencil-square text-warning"></i></a>
+                    </td>
+                    <td>
+                        <a asp-controller="Booking" asp-action="Delete" asp-route-id="@booking.BookingId"><i class="bi bi-x-circle text-danger"></i></a>
+                    </td>
                 </tr>
             }
         </tbody>
