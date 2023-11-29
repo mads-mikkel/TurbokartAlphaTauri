@@ -5,21 +5,71 @@
 
 
 
-<form method="post">
-    <div class="row">
-        <div class="col">
-            <label class="form-label">Dato:</label>
-            <input class="form-control" type="date" asp-for="Date"/>
+<div class="row mb-3">
+    <form method="post" class="w-75">
+        <div class="row">
+            <div class="col">
+                <label class="form-label">Dato:</label>
+                <input class="form-control" type="date" asp-for="Date" />
+            </div>
+            <div class="col">
+                <label class="form-label">Dage frem:</label>
+                <input class="form-control" min="0" max="" type="number" asp-for="DaysAhead" />
+            </div>
+            <div class="col d-flex align-items-end">
+                <button class="btn btn-primary"><i class="bi bi-search me-1"></i> Søg</button>
+            </div>
+            
         </div>
-        <div class="col">
-            <label class="form-label">Dage frem:</label>
-            <input class="form-control" type="number" asp-for="DaysAhead"/>
-        </div>
-        <div class="col d-flex align-items-end">
-            <button class="btn btn-primary"><i class="bi bi-search me-1"></i> Søg</button>
-        </div>
-        <div class="col d-flex justify-content-end align-items-end">
-            <a class="btn btn-success" href=""><i class="bi bi-plus-circle me-1"></i> Opret ny booking</a>
-        </div>
+    </form>
+    <div class="col w-25 d-flex justify-content-end align-items-end">
+        <a class="btn btn-success" href=""><i class="bi bi-plus-circle me-1"></i> Opret ny booking</a>
     </div>
-</form>
+</div>
+<div>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Id:</th>
+                <th scope="col">Grandprix:</th>
+                <th scope="col">Email:</th>
+                <th scope="col">Antal:</th>
+                <th scope="col">Dato:</th>
+                <th scope="col">Navn:</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            @foreach (var booking in Model.Bookings)
+            {
+                <tr>
+                    <td>
+                        @booking.BookingId
+                    </td>
+                    <td>
+
+                        @booking.Grandprix
+                    </td>
+                    <td>
+
+                        @booking.Email
+                    </td>
+                    <td>
+
+                        @booking.Amount
+                    </td>
+                    <td>
+
+                        @booking.Date.ToString("dd/MM/yy hh:mm")
+                    </td>
+                    <td>
+
+                        @booking.Customer.Name
+                    </td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+

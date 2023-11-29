@@ -1,21 +1,25 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using Tubrbokart.Presentation.Websites.TurbokartInternal.Models;
+using Tubrbokart.Presentation.Websites.TurbokartInternal.Models.Viewmodels;
+using Turbokart.Application.Interfaces;
 
 namespace Tubrbokart.Presentation.Websites.TurbokartInternal.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly IBookingUseCase bookingUseCase;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(IBookingUseCase bookingUseCase)
         {
-            _logger = logger;
+            this.bookingUseCase = bookingUseCase;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var viewModel = new IndexModel();
+            viewModel.Bookings = await bookingUseCase.GetAllBookings();
+            return View(viewModel);
         }
 
         public IActionResult Privacy()
