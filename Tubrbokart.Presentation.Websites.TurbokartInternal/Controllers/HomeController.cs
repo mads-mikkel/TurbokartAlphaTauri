@@ -3,6 +3,7 @@ using System.Diagnostics;
 using Tubrbokart.Presentation.Websites.TurbokartInternal.Models;
 using Tubrbokart.Presentation.Websites.TurbokartInternal.Models.Viewmodels;
 using Turbokart.Application.Interfaces;
+using Turbokart.Domain.Entities;
 
 namespace Tubrbokart.Presentation.Websites.TurbokartInternal.Controllers
 {
@@ -19,7 +20,7 @@ namespace Tubrbokart.Presentation.Websites.TurbokartInternal.Controllers
         public async Task<IActionResult> Index()
         {
             var viewModel = new IndexModel();
-            viewModel.Bookings = await bookingUseCase.GetAllBookings();
+            viewModel.Bookings = await bookingUseCase.GetTodaysAndMoreBookings(viewModel.DaysAhead, viewModel.Date);
             return View(viewModel);
         }
 
@@ -29,9 +30,10 @@ namespace Tubrbokart.Presentation.Websites.TurbokartInternal.Controllers
             var viewModel = model;
             if (ModelState.IsValid)
             {
-
+                viewModel.Bookings = await bookingUseCase.GetTodaysAndMoreBookings(viewModel.DaysAhead, viewModel.Date);
+                return View(viewModel);
             }
-            viewModel.Bookings = await bookingUseCase.GetAllBookings();
+            viewModel.Bookings = new Booking[0];
             return View(viewModel);
         }
 
