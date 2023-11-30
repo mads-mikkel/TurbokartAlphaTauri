@@ -116,5 +116,18 @@ namespace Turbokart.Presentation.Apis.TurbokartAPI.Controllers
             var newBookings = await usecase.DeleteBooking(id, reason);
             return Ok(newBookings);
         }
+        [HttpGet("/api/thisDateAndMore")]
+        public async Task<ActionResult<IEnumerable<Booking>>> GetTodaysAndMoreBookings(ushort amount, DateOnly thisDate)
+        {
+            try
+            {
+                var bookings = await usecase.GetTodaysAndMoreBookings(amount, thisDate);
+                return Ok(bookings);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
     }
 }

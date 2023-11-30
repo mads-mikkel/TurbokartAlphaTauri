@@ -45,5 +45,18 @@ namespace Turbokart.Infrastructure.Persistence.Repositories
         {
             set.Remove(booking);
         }
+
+        public async Task<IEnumerable<Booking>> GetTodaysAndMoreBookings(ushort amount, DateOnly thisDate)
+        {
+            //List<Booking> bookings = new List<Booking>();
+            //for (int i = 0; i <= 10; i = i++)
+            //{
+            //    Console.WriteLine(i);
+            //}
+            //IEnumerable<Booking> bookingsArray = bookings;
+            //return (Task<IEnumerable<Booking>>)bookingsArray;
+            return await set.Include(b => b.Customer)
+                .Where(b => b.Date.Date >= thisDate.ToDateTime(new TimeOnly()) && b.Date.Date <= thisDate.ToDateTime(new TimeOnly()).AddDays((int)amount)).ToArrayAsync();
+        }
     }
 }

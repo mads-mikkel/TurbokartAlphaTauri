@@ -12,5 +12,6 @@ namespace Turbokart.Application.Interfaces
         Task<Booking> UpdateBooking(Booking booking);
 
         Task<IEnumerable<Booking>> DeleteBooking(int id, string reason);
+        Task<IEnumerable<Booking>> GetTodaysAndMoreBookings(ushort amount, DateOnly thisDate);
     }
 }

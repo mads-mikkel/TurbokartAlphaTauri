@@ -3,7 +3,7 @@ using Turbokart.Domain.Entities;
 
 namespace Turbokart.Presentation.Apis.TurbokartAPI.Controllers
 {
-    [Route("/api")]
+    [Route("/deleted")]
     [ApiController]
     public class DeletedBookingController : Controller
     {

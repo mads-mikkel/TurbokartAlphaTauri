@@ -10,5 +10,7 @@ namespace Turbokart.Infrastructure.Persistence.Interfaces
         Task<Booking> GetLatestBooking();
 
         Task DeleteBooking(Booking booking);
+        Task<IEnumerable<Booking>> GetTodaysAndMoreBookings(ushort amount, DateOnly thisDate);
+
     }
 }

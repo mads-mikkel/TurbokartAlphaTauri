@@ -88,5 +88,11 @@ namespace Turbokart.Application.UseCases
             }
             
         }
+
+        public async Task<IEnumerable<Booking>> GetTodaysAndMoreBookings(ushort amount, DateOnly thisDate)
+        {
+            IBookingRepository bookingRepository = unitOfWork.BookingRepository;
+            return await bookingRepository.GetTodaysAndMoreBookings(amount, thisDate);
+        }
     }
 }
