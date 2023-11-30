@@ -16,6 +16,47 @@ namespace Tubrbokart.Presentation.Websites.TurbokartInternal.Controllers
             this.bookingUseCase = bookingUseCase;
         }
 
+        [HttpGet("Create")]
+        public async Task<ActionResult<EditModel>> Create()
+        {
+            return View(new EditModel());
+        }
+
+        [HttpPost("Create")]
+        public async Task<ActionResult<EditModel>> Create([FromForm]EditModel model)
+        {           
+
+            if (ModelState.IsValid)
+            {
+                var newDate = DateTime.Now;
+                string[] timeParts = model.Time.Split(':');
+
+                if (timeParts.Length == 2 && int.TryParse(timeParts[0], out int hour) && int.TryParse(timeParts[1], out int minute))
+                {
+                    // Add hour and minute to the DateTime object
+                    newDate = model.Date.ToDateTime(new TimeOnly().AddHours(hour).AddMinutes(minute));
+                }
+                else
+                {
+                    return View(model);
+                }
+                Booking newBooking = new Booking();
+                newBooking.Grandprix = model.Grandprix;
+                newBooking.Email = model.Email;
+                newBooking.Phonenumber = model.Phonenumber;
+                newBooking.Date = newDate;
+                newBooking.Amount = model.Amount;
+
+                Customer customer = new Customer();
+                customer.Name = model.Email.Split('@')[0];
+
+                await bookingUseCase.BookNew(newBooking, customer);
+
+                return RedirectToAction("Index", "Home");
+            }
+            return View(model);
+        }
+
         [HttpGet("Edit/{id}")]
         public async Task<ActionResult<EditModel>> Edit(int id)
         {
@@ -54,8 +95,9 @@ namespace Tubrbokart.Presentation.Websites.TurbokartInternal.Controllers
         }
 
         [HttpGet("Delete/{id}")]
-        public IActionResult Delete(int id)
+        public async Task<ActionResult> Delete(int id)
         {
+
             return View();
         }
     }
