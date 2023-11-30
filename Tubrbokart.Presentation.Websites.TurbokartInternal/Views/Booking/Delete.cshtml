@@ -1,4 +1,60 @@
-﻿@{
+﻿@model Tubrbokart.Presentation.Websites.TurbokartInternal.Models.Viewmodels.DeleteModel
+@{
 }
 
 <h1>DELETE</h1>
+
+<ul class="list-group">
+    <li class="list-group-item">
+        <div class="col">
+            <h2>Id:</h2>
+            <h5>@Model.Booking.BookingId</h5>
+        </div>
+    </li>
+    <li class="list-group-item">
+        <div class="col">
+            <h2>Grandprix:</h2>
+            <h5>@Model.Booking.Grandprix</h5>
+        </div>
+    </li>
+    <li class="list-group-item">
+        <div class="col">
+            <h2>Navn:</h2>
+            <h5>@Model.Booking.Customer.Name</h5>
+        </div>
+    </li>
+    <li class="list-group-item">
+        <div class="col">
+            <h2>Email:</h2>
+            <h5>@Model.Booking.Email</h5>
+        </div>
+    </li>
+    
+    <li class="list-group-item">
+        <div class="col">
+            <h2>Tlf. nummer:</h2>
+            <h5>@Model.Booking.Phonenumber</h5>
+        </div>
+    </li>
+    <li class="list-group-item">
+        <div class="col">
+            <h2>Tid:</h2>
+            <h5>@Model.Booking.Date.ToString("dd/MM/yy hh:mm")</h5>
+        </div>
+    </li>
+    <li class="list-group-item">
+        <div class="col">
+            <h2>Antal:</h2>
+            <h5>@Model.Booking.Amount</h5>
+        </div>
+    </li>
+</ul>
+<form method="post" class="form">
+    <div class="mb-3">
+        <label class="form-label">Begrundelse:</label>
+        <textarea asp-for="Reason" style="min-height: 300px;" class="form-control"></textarea>
+    </div>
+    <div class="mb-3">
+        <button class="btn btn-danger">Slet booking</button>
+    </div>
+</form>

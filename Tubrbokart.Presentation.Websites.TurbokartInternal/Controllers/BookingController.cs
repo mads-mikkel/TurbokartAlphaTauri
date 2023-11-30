@@ -95,10 +95,22 @@ namespace Tubrbokart.Presentation.Websites.TurbokartInternal.Controllers
         }
 
         [HttpGet("Delete/{id}")]
-        public async Task<ActionResult> Delete(int id)
+        public async Task<ActionResult<DeleteModel>> Delete(int id)
         {
+            var model = new DeleteModel();
+            model.Booking = await bookingUseCase.GetOneBooking(id);
+            return View(model);
+        }
 
-            return View();
+        [HttpPost("Delete/{id}")]
+        public async Task<ActionResult<Booking>> Delete(int id, DeleteModel model)
+        {
+            if(model.Reason.Length > 0)
+            {
+                await bookingUseCase.DeleteBooking(id, model.Reason);
+                return RedirectToAction("Index", "Home");
+            }
+            return View(await bookingUseCase.GetOneBooking(id));
         }
     }
 }
