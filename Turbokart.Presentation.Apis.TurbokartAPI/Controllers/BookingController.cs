@@ -111,9 +111,9 @@ namespace Turbokart.Presentation.Apis.TurbokartAPI.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult<IEnumerable<Booking>>> DeleteBooking(int id)
+        public async Task<ActionResult<IEnumerable<Booking>>> DeleteBooking(int id, string reason)
         {
-            var newBookings = await usecase.DeleteBooking(id);
+            var newBookings = await usecase.DeleteBooking(id, reason);
             return Ok(newBookings);
         }
     }
