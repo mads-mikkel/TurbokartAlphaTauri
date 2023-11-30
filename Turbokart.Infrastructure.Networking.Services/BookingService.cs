@@ -29,7 +29,7 @@ namespace Turbokart.Infrastructure.Networking.Services
         {
             using (HttpClient client = new())
             {
-                var result = await client.DeleteFromJsonAsync<IEnumerable<Booking>>(uri + "/" + id.ToString());
+                var result = await client.DeleteFromJsonAsync<IEnumerable<Booking>>(uri + "/" + id.ToString() + "?reason=" + Uri.EscapeDataString(reason));
 
                 if (result is null)
                 {
