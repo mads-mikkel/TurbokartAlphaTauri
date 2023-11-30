@@ -22,8 +22,9 @@ namespace Turbokart.Application.UseCases
 
         public async Task<IEnumerable<DeletedBooking>> DeleteDeletedBooking(int id)
         {
-            var som = await GetOneDeletedBooking(id);
-            return await deletedBookingRepository.DeleteBooking(som);
+            await deletedBookingRepository.DeleteBooking(await GetOneDeletedBooking(id));
+            await unitOfWork.Commit();
+            return await deletedBookingRepository.GetAll();
         }
 
         public async Task<IEnumerable<DeletedBooking>> GetAllDeletedBookings()
