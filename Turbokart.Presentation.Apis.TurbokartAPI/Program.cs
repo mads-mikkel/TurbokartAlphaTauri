@@ -19,6 +19,7 @@ builder.Services.AddScoped<IBookingUseCase, BookingUseCase>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IBookingRepository, BookingRepository>();
 builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
+builder.Services.AddScoped<IDeletedBookingUseCase, DeletedBookingUseCase>();
 
 var app = builder.Build();
 

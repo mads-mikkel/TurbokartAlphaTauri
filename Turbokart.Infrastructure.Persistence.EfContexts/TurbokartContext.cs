@@ -8,6 +8,7 @@ namespace Turbokart.Infrastructure.Persistence.EfContexts
     {
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Booking> Bookings { get; set; }
+        public DbSet<DeletedBooking> DeletedBookings { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
