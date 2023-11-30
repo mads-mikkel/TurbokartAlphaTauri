@@ -2,51 +2,34 @@
 @{
 }
 
-<h1>DELETE</h1>
-
-<ul class="list-group">
-    <li class="list-group-item">
-        <div class="col">
-            <h2>Id:</h2>
-            <h5>@Model.Booking.BookingId</h5>
-        </div>
+<ul class="list-group mb-5">
+    <li class="list-group-item pb-0">
+        <h6>Id:</h6>
+        <p>@Model.Booking.BookingId</p>
     </li>
-    <li class="list-group-item">
-        <div class="col">
-            <h2>Grandprix:</h2>
-            <h5>@Model.Booking.Grandprix</h5>
-        </div>
+    <li class="list-group-item pb-0">
+        <h6>Grandprix:</h6>
+        <p>@Model.Booking.Grandprix</p>
     </li>
-    <li class="list-group-item">
-        <div class="col">
-            <h2>Navn:</h2>
-            <h5>@Model.Booking.Customer.Name</h5>
-        </div>
+    <li class="list-group-item pb-0">
+        <h6>Navn:</h6>
+        <p>@Model.Booking.Customer.Name</p>
     </li>
-    <li class="list-group-item">
-        <div class="col">
-            <h2>Email:</h2>
-            <h5>@Model.Booking.Email</h5>
-        </div>
+    <li class="list-group-item pb-0">
+        <h6>Email:</h6>
+        <p>@Model.Booking.Email</p>
     </li>
-    
-    <li class="list-group-item">
-        <div class="col">
-            <h2>Tlf. nummer:</h2>
-            <h5>@Model.Booking.Phonenumber</h5>
-        </div>
+    <li class="list-group-item pb-0">
+        <h6>Tlf. nummer:</h6>
+        <p>@Model.Booking.Phonenumber</p>
     </li>
-    <li class="list-group-item">
-        <div class="col">
-            <h2>Tid:</h2>
-            <h5>@Model.Booking.Date.ToString("dd/MM/yy hh:mm")</h5>
-        </div>
+    <li class="list-group-item pb-0">
+        <h6>Tid:</h6>
+        <p>@Model.Booking.Date.ToString("dd/MM/yy hh:mm")</p>
     </li>
-    <li class="list-group-item">
-        <div class="col">
-            <h2>Antal:</h2>
-            <h5>@Model.Booking.Amount</h5>
-        </div>
+    <li class="list-group-item pb-0">
+        <h6>Antal:</h6>
+        <p>@Model.Booking.Amount</p>
     </li>
 </ul>
 <form method="post" class="form">
