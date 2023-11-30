@@ -25,7 +25,7 @@ namespace Turbokart.Infrastructure.Networking.Services
             }
         }
 
-        public async Task<IEnumerable<Booking>> DeleteBooking(int id)
+        public async Task<IEnumerable<Booking>> DeleteBooking(int id, string reason)
         {
             using (HttpClient client = new())
             {
