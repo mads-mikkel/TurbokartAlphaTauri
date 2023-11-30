@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using Microsoft.AspNetCore.Mvc;
+using System.Net;
 using System.Net.Http.Json;
 using Turbokart.Application.Interfaces;
 using Turbokart.Domain.Entities;
@@ -110,6 +111,22 @@ namespace Turbokart.Infrastructure.Networking.Services
                 if (result is null)
                 {
                     return new();
+                }
+
+                return result;
+            }
+        }
+
+        public async Task<IEnumerable<Booking>> GetTodaysAndMoreBookings(ushort amount, DateOnly thisDate)
+        {
+
+            using (HttpClient client = new())
+            {
+                var result = await client.GetFromJsonAsync<IEnumerable<Booking>>(uri + "/thisDateAndMore?amount=5" + amount.ToString() + "&thisDate=" + thisDate.ToString());
+
+                if (result is null)
+                {
+                    return new Booking[0];
                 }
 
                 return result;
