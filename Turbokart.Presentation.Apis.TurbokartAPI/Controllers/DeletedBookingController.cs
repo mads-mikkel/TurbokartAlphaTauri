@@ -9,7 +9,7 @@ namespace Turbokart.Presentation.Apis.TurbokartAPI.Controllers
     {
         private readonly IDeletedBookingUseCase deletedBookingUseCase;
 
-        public DeletedBookingController( IDeletedBookingUseCase deletedBookingUseCase)
+        public DeletedBookingController(IDeletedBookingUseCase deletedBookingUseCase)
         {
             this.deletedBookingUseCase = deletedBookingUseCase;
         }
