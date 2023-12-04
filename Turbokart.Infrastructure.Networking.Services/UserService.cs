@@ -62,9 +62,17 @@ namespace Turbokart.Infrastructure.Networking.Services
         {
             using (HttpClient client = new())
             {
-                var result = await client.GetFromJsonAsync<bool>(uri + "/user?username=" + Uri.EscapeDataString(username) + "&password=" + Uri.EscapeDataString(password));
+                try
+                {
 
-                return result;
+                    var result = await client.GetFromJsonAsync<bool>(uri + "/user?username=" + Uri.EscapeDataString(username) + "&password=" + Uri.EscapeDataString(password));
+                    return result;
+                }
+                catch
+                {
+                    return false;
+                }
+
             }
         }
 
