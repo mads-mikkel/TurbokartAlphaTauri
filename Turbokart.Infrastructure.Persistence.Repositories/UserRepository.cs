@@ -9,7 +9,7 @@ using Turbokart.Infrastructure.Persistence.Interfaces;
 
 namespace Turbokart.Infrastructure.Persistence.Repositories
 {
-    internal class UserRepository : RepositoryBase<User>, IUserRepository
+    public class UserRepository : RepositoryBase<User>, IUserRepository
     {
         public UserRepository(DbContext dbContext) : base(dbContext)
         {

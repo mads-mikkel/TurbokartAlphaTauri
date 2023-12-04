@@ -21,6 +21,8 @@ builder.Services.AddScoped<IBookingRepository, BookingRepository>();
 builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
 builder.Services.AddScoped<IDeletedBookingUseCase, DeletedBookingUseCase>();
 builder.Services.AddScoped<IDeletedBookingRepository, DeletedBookingRepository>();
+builder.Services.AddScoped<IUserUseCase, UserUseCase>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 var app = builder.Build();
 

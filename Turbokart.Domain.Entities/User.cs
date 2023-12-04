@@ -8,7 +8,7 @@ namespace Turbokart.Domain.Entities
 {
     public class User
     {
-        public int UsersId { get; set; }
+        public int UserId { get; set; }
         public string Brugernavn { get; set; }
         public string Password { get; set; }
     }
