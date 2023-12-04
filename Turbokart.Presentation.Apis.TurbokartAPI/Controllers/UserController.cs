@@ -28,13 +28,13 @@ namespace Turbokart.Presentation.Apis.TurbokartAPI.Controllers
             }
         }
 
-        [HttpGet("{bool}")]
+        [HttpGet("/userCheck/user")]
         public async Task<ActionResult<bool>> DoesUserExist(string username, string password)
         {
             try
             {
                 var user = await userUseCase.IsUserInSystem(username, password);
-                if (user = true)
+                if (user)
                 {
                     return Ok(user);
                 }
@@ -65,7 +65,7 @@ namespace Turbokart.Presentation.Apis.TurbokartAPI.Controllers
                 return StatusCode(500, ex.Message);
             }
         }
-        [HttpGet("{user}")]
+        [HttpGet("/userCheck/oneuser")]
         public async Task<ActionResult<User>> GetOneUsers(string username, string password)
         {
             try
