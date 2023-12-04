@@ -75,7 +75,7 @@ namespace Turbokart.Application.UseCases
             var booking = await GetOneBooking(id);
             if(booking is not null)
             {
-                DeletedBooking deletedBooking = new() { Amount = booking.Amount, BookingId = booking.BookingId, Customer = booking.Customer, CustomerId = booking.CustomerId, Date = booking.Date, Email = booking.Email, Grandprix = booking.Grandprix, Phonenumber = booking.Phonenumber, ReasonOfDeletion = reason };
+                DeletedBooking deletedBooking = new() { Amount = booking.Amount, BookingId = booking.BookingId, Customer = booking.Customer, CustomerId = booking.CustomerId, Date = booking.Date, Grandprix = booking.Grandprix, ReasonOfDeletion = reason };
                 deletedBookingRepository.Save(deletedBooking);
 
                 await bookingRepository.DeleteBooking(await GetOneBooking(id));

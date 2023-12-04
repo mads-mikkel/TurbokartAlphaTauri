@@ -17,14 +17,14 @@ namespace Tubrbokart.Presentation.Websites.TurbokartInternal.Controllers
         }
 
         [HttpGet("Create")]
-        public async Task<ActionResult<EditModel>> Create()
+        public async Task<ActionResult<CreateModel>> Create()
         {
             if (Request.Cookies["Username"] is null) return RedirectToAction("Index", "Login");
-            return View(new EditModel());
+            return View(new CreateModel());
         }
 
         [HttpPost("Create")]
-        public async Task<ActionResult<EditModel>> Create([FromForm]EditModel model)
+        public async Task<ActionResult<EditModel>> Create([FromForm]CreateModel model)
         {           
 
             if (Request.Cookies["Username"] is null) return RedirectToAction("Index", "Login");
@@ -44,13 +44,13 @@ namespace Tubrbokart.Presentation.Websites.TurbokartInternal.Controllers
                 }
                 Booking newBooking = new Booking();
                 newBooking.Grandprix = model.Grandprix;
-                newBooking.Email = model.Email;
-                newBooking.Phonenumber = model.Phonenumber;
                 newBooking.Date = newDate;
                 newBooking.Amount = model.Amount;
 
                 Customer customer = new Customer();
                 customer.Name = model.Email.Split('@')[0];
+                customer.Email = model.Email;
+                customer.Phonenumber = model.Phonenumber;
 
                 await bookingUseCase.BookNew(newBooking, customer);
 
@@ -67,8 +67,6 @@ namespace Tubrbokart.Presentation.Websites.TurbokartInternal.Controllers
             EditModel model = new()
             {
                 Grandprix = booking.Grandprix,
-                Email = booking.Email,
-                Phonenumber = booking.Phonenumber,
                 Date = DateOnly.FromDateTime(booking.Date),
                 Time = booking.Date.ToString("hh:mm"),
                 Amount = (byte)booking.Amount
@@ -84,8 +82,6 @@ namespace Tubrbokart.Presentation.Websites.TurbokartInternal.Controllers
             {
                 Booking booking = await bookingUseCase.GetOneBooking(id);
                 booking.Grandprix = model.Grandprix;
-                booking.Email = model.Email;
-                booking.Phonenumber = model.Phonenumber;
                 string[] timeParts = model.Time.Split(':');
                 if (timeParts.Length == 2 && int.TryParse(timeParts[0], out int hour) && int.TryParse(timeParts[1], out int minute))
                 {
