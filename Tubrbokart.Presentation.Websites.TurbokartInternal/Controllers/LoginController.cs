@@ -1,11 +1,16 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Tubrbokart.Presentation.Websites.TurbokartInternal.Models.Viewmodels;
+using Turbokart.Application.Interfaces;
 
 namespace Tubrbokart.Presentation.Websites.TurbokartInternal.Controllers
 {
     public class LoginController : Controller
     {
-
+        public LoginController(
+            IUserUseCase userUseCase)
+        {
+            
+        }
         [HttpGet]
         public IActionResult Index()
         {
@@ -15,7 +20,10 @@ namespace Tubrbokart.Presentation.Websites.TurbokartInternal.Controllers
         [HttpPost]
         public IActionResult Index(LoginModel model)
         {
+            if (ModelState.IsValid)
+            {
 
+            }
             return View();
         }
     }
