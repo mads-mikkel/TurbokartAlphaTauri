@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Tubrbokart.Presentation.Websites.TurbokartInternal.Models.Viewmodels;
 
 namespace Tubrbokart.Presentation.Websites.TurbokartInternal.Controllers
 {
@@ -11,9 +12,10 @@ namespace Tubrbokart.Presentation.Websites.TurbokartInternal.Controllers
             return View();
         }
 
-        [HttpGet]
-        public IActionResult Index()
+        [HttpPost]
+        public IActionResult Index(LoginModel model)
         {
+
             return View();
         }
     }
