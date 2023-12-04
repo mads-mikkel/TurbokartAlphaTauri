@@ -16,17 +16,20 @@ namespace Turbokart.Infrastructure.Persistence.Repositories
         private IBookingRepository bookingRepository;
         private ICustomerRepository customerRepository;
         private readonly IDeletedBookingRepository deletedBookingRepository;
+        private readonly IUserRepository userRepository;
 
         public UnitOfWork(
             DbContext dbContext, 
             IBookingRepository bookingRepository,
             ICustomerRepository customerRepository,
-            IDeletedBookingRepository deletedBookingRepository)
+            IDeletedBookingRepository deletedBookingRepository,
+            IUserRepository userRepository)
         {
             this.dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
             this.bookingRepository = bookingRepository ?? throw new ArgumentNullException(nameof(bookingRepository));
             this.customerRepository = customerRepository ?? throw new ArgumentNullException(nameof(customerRepository));
             this.deletedBookingRepository = deletedBookingRepository ?? throw new ArgumentNullException(nameof(deletedBookingRepository));
+            this.userRepository = userRepository ?? throw new ArgumentNullException(nameof(deletedBookingRepository));
         }
 
         public IBookingRepository BookingRepository => bookingRepository;
@@ -34,6 +37,7 @@ namespace Turbokart.Infrastructure.Persistence.Repositories
         public ICustomerRepository CustomerRepository => customerRepository;
 
         public IDeletedBookingRepository DeletedBookingRepository => deletedBookingRepository;
+        public IUserRepository UserRepository => userRepository;
  
         public async Task Commit()
         {
