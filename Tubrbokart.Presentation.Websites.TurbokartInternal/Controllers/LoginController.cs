@@ -35,5 +35,12 @@ namespace Tubrbokart.Presentation.Websites.TurbokartInternal.Controllers
             model.ErrorMessage = "Invalid Credentials";
             return View(model);
         }
+
+        [HttpGet]
+        public IActionResult Logout()
+        {
+            Response.Cookies.Delete("Username");
+            return RedirectToAction("Index", "Login");
+        }
     }
 }

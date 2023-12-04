@@ -19,6 +19,7 @@ namespace Tubrbokart.Presentation.Websites.TurbokartInternal.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
+            if (Request.Cookies["Username"] is null) return RedirectToAction("Login", "Account");
             var viewModel = new IndexModel();
             viewModel.Bookings = await bookingUseCase.GetTodaysAndMoreBookings(viewModel.DaysAhead, viewModel.Date);
             return View(viewModel);
@@ -27,6 +28,7 @@ namespace Tubrbokart.Presentation.Websites.TurbokartInternal.Controllers
         [HttpPost]
         public async Task<IActionResult> Index(IndexModel model)
         {
+            if (Request.Cookies["Username"] is null) return RedirectToAction("Login", "Account");
             var viewModel = model;
             if (ModelState.IsValid)
             {
@@ -39,6 +41,7 @@ namespace Tubrbokart.Presentation.Websites.TurbokartInternal.Controllers
 
         public IActionResult Privacy()
         {
+            if (Request.Cookies["Username"] is null) return RedirectToAction("Login", "Account");
             return View();
         }
 
