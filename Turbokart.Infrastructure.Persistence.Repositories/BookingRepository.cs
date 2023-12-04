@@ -13,19 +13,19 @@ namespace Turbokart.Infrastructure.Persistence.Repositories
 
         public async override Task<IEnumerable<Booking>> GetAll()
         {
-            return await set.Include(b => b.Customer).ToArrayAsync();
+            return await set.Include(b => b.Customer).OrderBy(b => b.Date).ToArrayAsync();
         }
 
         public async Task<IEnumerable<Booking>> GetTodaysBookings()
         {
             return await set.Include(b => b.Customer)
-                .Where(b => b.Date.Date == DateTime.Today).ToArrayAsync();
+                .Where(b => b.Date.Date == DateTime.Today).OrderBy(b => b.Date).ToArrayAsync();
         }
 
         public async Task<IEnumerable<Booking>> GetCustomersBookings(int id)
         {
             return await set.Include(b => b.Customer)
-                .Where(b => b.CustomerId == id).ToArrayAsync();
+                .Where(b => b.CustomerId == id).OrderBy(b => b.Date).ToArrayAsync();
         }
 
         public async override Task<Booking> GetBy(object id)
@@ -49,7 +49,7 @@ namespace Turbokart.Infrastructure.Persistence.Repositories
         public async Task<IEnumerable<Booking>> GetTodaysAndMoreBookings(ushort amount, DateOnly thisDate)
         {
             return await set.Include(b => b.Customer)
-                .Where(b => b.Date.Date >= thisDate.ToDateTime(new TimeOnly()) && b.Date.Date <= thisDate.ToDateTime(new TimeOnly()).AddDays((int)amount)).ToArrayAsync();
+                .Where(b => b.Date.Date >= thisDate.ToDateTime(new TimeOnly()) && b.Date.Date <= thisDate.ToDateTime(new TimeOnly()).AddDays((int)amount)).OrderBy(b => b.Date).ToArrayAsync();
         }
     }
 }

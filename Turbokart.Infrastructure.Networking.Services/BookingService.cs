@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using Microsoft.AspNetCore.Mvc;
+using System.Net;
 using System.Net.Http.Json;
 using Turbokart.Application.Interfaces;
 using Turbokart.Domain.Entities;
@@ -29,7 +30,7 @@ namespace Turbokart.Infrastructure.Networking.Services
         {
             using (HttpClient client = new())
             {
-                var result = await client.DeleteFromJsonAsync<IEnumerable<Booking>>(uri + "/" + id.ToString());
+                var result = await client.DeleteFromJsonAsync<IEnumerable<Booking>>(uri + "/" + id.ToString() + "?reason=" + Uri.EscapeDataString(reason));
 
                 if (result is null)
                 {
@@ -110,6 +111,23 @@ namespace Turbokart.Infrastructure.Networking.Services
                 if (result is null)
                 {
                     return new();
+                }
+
+                return result;
+            }
+        }
+
+        public async Task<IEnumerable<Booking>> GetTodaysAndMoreBookings(ushort amount, DateOnly thisDate)
+        {
+
+            using (HttpClient client = new())
+            {
+                string url = uri + "/thisDateAndMore?amount=5" + amount.ToString() + "&thisDate=" + thisDate.ToString("MM/dd/yyyy");
+                var result = await client.GetFromJsonAsync<IEnumerable<Booking>>(url);
+
+                if (result is null)
+                {
+                    return new Booking[0];
                 }
 
                 return result;
