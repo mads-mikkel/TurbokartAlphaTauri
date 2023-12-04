@@ -7,6 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddTransient<IBookingUseCase, BookingService>();
+builder.Services.AddTransient<IUserUseCase, UserService>();
 
 var app = builder.Build();
 
