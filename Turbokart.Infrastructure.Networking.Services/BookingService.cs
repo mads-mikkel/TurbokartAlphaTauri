@@ -122,7 +122,7 @@ namespace Turbokart.Infrastructure.Networking.Services
 
             using (HttpClient client = new())
             {
-                string url = uri + "/thisDateAndMore?amount=5" + amount.ToString() + "&thisDate=" + thisDate.ToString("MM/dd/yyyy");
+                string url = uri + "/thisDateAndMore?amount=" + amount.ToString() + "&thisDate=" + thisDate.ToString("MM/dd/yyyy");
                 var result = await client.GetFromJsonAsync<IEnumerable<Booking>>(url);
 
                 if (result is null)
