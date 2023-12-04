@@ -2,7 +2,7 @@
 @{
 }
 <form class="form" method="post">
-    @if (Model.ErrorMessage != null && Model.ErrorMessage.Length > 0)
+    @if (Model.ErrorMessage.Length > 0)
     {
         <p class="mb-3 text-danger">
             @Model.ErrorMessage

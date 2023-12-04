@@ -17,7 +17,7 @@ namespace Tubrbokart.Presentation.Websites.TurbokartInternal.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            return View();
+            return View(new LoginModel());
         }
 
         [HttpPost]
