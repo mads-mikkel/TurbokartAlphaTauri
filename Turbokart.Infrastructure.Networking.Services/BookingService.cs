@@ -115,18 +115,5 @@ namespace Turbokart.Infrastructure.Networking.Services
                 return result;
             }
         }
-        public async Task<IEnumerable<Booking>> GetTodaysAndMoreBookings(ushort amount, DateOnly thisDate)
-        {
-            using (HttpClient client = new())
-            {
-                string url = uri + "/thisDateAndMore?amount=" + amount.ToString() + "&thisDate=" + thisDate.ToString("MM/dd/yyyy");
-                var result = await client.GetFromJsonAsync<IEnumerable<Booking>>(url);
-                if (result is null)
-                {
-                    return new Booking[0];
-                }
-                return result;
-            }
-        }
     }
 }
