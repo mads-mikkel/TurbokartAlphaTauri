@@ -23,12 +23,8 @@ namespace Turbokart.Infrastructure.Persistence.Repositories
 
         public async Task<bool> IsUserInSystem(string username, string password)
         {
-            var isNull = await set.Where(b => b.Brugernavn == username && b.Password == password).FirstAsync();
-            if (isNull != null)
-            {
-                return true;
-            }
-            else { return false; }
+            var isNull = await set.Where(b => b.Brugernavn == username && b.Password == password).FirstOrDefaultAsync();
+            return isNull != null;
         }
 
     }

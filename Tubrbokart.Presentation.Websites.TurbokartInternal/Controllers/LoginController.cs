@@ -1,30 +1,39 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Tubrbokart.Presentation.Websites.TurbokartInternal.Models.Viewmodels;
 using Turbokart.Application.Interfaces;
+using Turbokart.Domain.Entities;
 
 namespace Tubrbokart.Presentation.Websites.TurbokartInternal.Controllers
 {
     public class LoginController : Controller
     {
+        private readonly IUserUseCase userUseCase;
+
         public LoginController(
             IUserUseCase userUseCase)
         {
-            
+            this.userUseCase = userUseCase;
         }
         [HttpGet]
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
             return View();
         }
 
         [HttpPost]
-        public IActionResult Index(LoginModel model)
+        public async Task<IActionResult> Index(LoginModel model)
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && await userUseCase.IsUserInSystem(model.Username, model.Password))
             {
+                Response.Cookies.Append("Username", model.Username, new CookieOptions
+                {
+                    Expires = DateTimeOffset.UtcNow.AddDays(1) // Cookie expiration time
+                });
 
+                return RedirectToAction("Index", "Home");
             }
-            return View();
+            model.ErrorMessage = "Invalid Credentials";
+            return View(model);
         }
     }
 }
