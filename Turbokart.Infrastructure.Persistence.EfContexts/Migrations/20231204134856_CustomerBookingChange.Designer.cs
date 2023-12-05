@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Turbokart.Infrastructure.Persistence.EfContexts;
 
@@ -11,9 +12,11 @@ using Turbokart.Infrastructure.Persistence.EfContexts;
 namespace Turbokart.Infrastructure.Persistence.EfContexts.Migrations
 {
     [DbContext(typeof(TurbokartContext))]
-    partial class TurbokartContextModelSnapshot : ModelSnapshot
+    [Migration("20231204134856_CustomerBookingChange")]
+    partial class CustomerBookingChange
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -95,7 +98,15 @@ namespace Turbokart.Infrastructure.Persistence.EfContexts.Migrations
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Grandprix")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Phonenumber")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 

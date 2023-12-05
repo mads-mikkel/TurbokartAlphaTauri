@@ -17,15 +17,17 @@ namespace Tubrbokart.Presentation.Websites.TurbokartInternal.Controllers
         }
 
         [HttpGet("Create")]
-        public async Task<ActionResult<EditModel>> Create()
+        public async Task<ActionResult<CreateModel>> Create()
         {
-            return View(new EditModel());
+            if (Request.Cookies["Username"] is null) return RedirectToAction("Index", "Login");
+            return View(new CreateModel());
         }
 
         [HttpPost("Create")]
-        public async Task<ActionResult<EditModel>> Create([FromForm]EditModel model)
+        public async Task<ActionResult<EditModel>> Create([FromForm]CreateModel model)
         {           
 
+            if (Request.Cookies["Username"] is null) return RedirectToAction("Index", "Login");
             if (ModelState.IsValid)
             {
                 var newDate = DateTime.Now;
@@ -42,13 +44,13 @@ namespace Tubrbokart.Presentation.Websites.TurbokartInternal.Controllers
                 }
                 Booking newBooking = new Booking();
                 newBooking.Grandprix = model.Grandprix;
-                newBooking.Email = model.Email;
-                newBooking.Phonenumber = model.Phonenumber;
                 newBooking.Date = newDate;
                 newBooking.Amount = model.Amount;
 
                 Customer customer = new Customer();
                 customer.Name = model.Email.Split('@')[0];
+                customer.Email = model.Email;
+                customer.Phonenumber = model.Phonenumber;
 
                 await bookingUseCase.BookNew(newBooking, customer);
 
@@ -60,12 +62,11 @@ namespace Tubrbokart.Presentation.Websites.TurbokartInternal.Controllers
         [HttpGet("Edit/{id}")]
         public async Task<ActionResult<EditModel>> Edit(int id)
         {
+            if (Request.Cookies["Username"] is null) return RedirectToAction("Index", "Login");
             Booking booking = await bookingUseCase.GetOneBooking(id);
             EditModel model = new()
             {
                 Grandprix = booking.Grandprix,
-                Email = booking.Email,
-                Phonenumber = booking.Phonenumber,
                 Date = DateOnly.FromDateTime(booking.Date),
                 Time = booking.Date.ToString("hh:mm"),
                 Amount = (byte)booking.Amount
@@ -76,12 +77,11 @@ namespace Tubrbokart.Presentation.Websites.TurbokartInternal.Controllers
         [HttpPost("Edit/{id}")]
         public async Task<ActionResult<EditModel>> Edit(int id, [FromForm]EditModel model)
         {
+            if (Request.Cookies["Username"] is null) return RedirectToAction("Index", "Login");
             if (ModelState.IsValid)
             {
                 Booking booking = await bookingUseCase.GetOneBooking(id);
                 booking.Grandprix = model.Grandprix;
-                booking.Email = model.Email;
-                booking.Phonenumber = model.Phonenumber;
                 string[] timeParts = model.Time.Split(':');
                 if (timeParts.Length == 2 && int.TryParse(timeParts[0], out int hour) && int.TryParse(timeParts[1], out int minute))
                 {
@@ -97,6 +97,7 @@ namespace Tubrbokart.Presentation.Websites.TurbokartInternal.Controllers
         [HttpGet("Delete/{id}")]
         public async Task<ActionResult<DeleteModel>> Delete(int id)
         {
+            if (Request.Cookies["Username"] is null) return RedirectToAction("Index", "Login");
             var model = new DeleteModel();
             model.Booking = await bookingUseCase.GetOneBooking(id);
             return View(model);
@@ -105,6 +106,7 @@ namespace Tubrbokart.Presentation.Websites.TurbokartInternal.Controllers
         [HttpPost("Delete/{id}")]
         public async Task<ActionResult<Booking>> Delete(int id, DeleteModel model)
         {
+            if (Request.Cookies["Username"] is null) return RedirectToAction("Index", "Login");
             if(model.Reason.Length > 0)
             {
                 await bookingUseCase.DeleteBooking(id, model.Reason);
